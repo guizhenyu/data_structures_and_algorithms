@@ -1,6 +1,7 @@
 package com.gzy.code.basic.class01;
 
 import static com.gzy.code.basic.class01.SelectionSort.printArray;
+import static com.gzy.code.basic.class01.SelectionSort.selectionSort;
 
 import java.util.Arrays;
 
@@ -69,8 +70,11 @@ public class BubbleSort {
       }
     }
 
+    int[] arr = generateArrayRandom(maxSize, maxValue);
     System.out.println(succeed?"Nice!":"Fucking fucked!");
-
+    printArray(arr);
+    selectionSort(arr);
+    printArray(arr);
 
   }
 
