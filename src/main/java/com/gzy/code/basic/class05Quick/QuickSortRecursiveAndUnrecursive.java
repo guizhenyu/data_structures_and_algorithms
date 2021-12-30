@@ -1,4 +1,4 @@
-package com.gzy.code.basic.class05;
+package com.gzy.code.basic.class05Quick;
 
 
 import java.util.Stack;

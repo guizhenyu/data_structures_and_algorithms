@@ -1,4 +1,4 @@
-package com.gzy.code.basic.class05;
+package com.gzy.code.basic.class05Quick;
 
 /**
  * description: PartitionAndQuickSort date: 2021/12/24 5:18 下午

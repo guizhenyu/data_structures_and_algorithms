@@ -1,4 +1,4 @@
-package com.gzy.code.basic.class05;
+package com.gzy.code.basic.class05Quick;
 
 /**
  * description: CountOfRangeSum date: 2021/12/24 1:26 下午
