@@ -204,13 +204,22 @@ public class MyHeapSort {
     }
     // 数据已经排好了，~ arr[leftEqualIndex] ~ arr[rightEqualIndex] ~ arr[r]
     // 很明显arr[r]跟arr[rightEqualIndex]交换
+    //todo:
+    //    midValue = arr[r]
+    //    由于 arr[leftEqualIndex] < midValue, 所以arr[leftEqualIndex + 1] = midValue
+    //    arr[rightEqualIndex] > midValue, arr[rightEqualIndex - 1] = midValue
+    //
     swap(arr, rightEqualIndex, r);
+    //todo:
+    //     由于 arr[rightEqualIndex] 和 arr[r] 发生了交换, 即 arr[rightEqualIndex] = midValue, 其实右边界已经往右移动了一位
+    //     所以下面计算跟 midValue 的数相等的下标边界的，最左侧的是 leftEqualIndex + 1， 最右侧的就是 rightEqualIndex
     int[] areaEqual = new int[2];
     // 此时可能存在很多情况，leftEqualIndex < l 或者 rightEqualIndex >= r
 
     // 这边左边界+1，是由于arr[leftEqualIndex] 肯定是小于arr[r]的，他的初始值是界外的，默认不存在
     areaEqual[0] = leftEqualIndex + 1;
     // 这边直接用rightEqualIndex
+
     areaEqual[1] = rightEqualIndex;
     return areaEqual;
   }
