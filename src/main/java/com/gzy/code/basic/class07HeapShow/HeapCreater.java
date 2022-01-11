@@ -69,7 +69,7 @@ public class HeapCreater<T> {
    * @return
    */
   public T peek(){
-    return heapSize == 0 ? null : heap.get(0);
+    return heap.get(0);
   }
 
   /**
@@ -79,7 +79,7 @@ public class HeapCreater<T> {
    */
   public T pop(){
     T ans = heap.get(0);
-    swap(0, heap.size() - 1);
+    swap(0, heapSize - 1);
     indexMap.remove(ans);
     heap.remove(--heapSize);
     heapify(0);
@@ -95,11 +95,11 @@ public class HeapCreater<T> {
 
     int left = index * 2 + 1;
 
-    while (index < heapSize){
+    while (left < heapSize){
 
-      int best = left + 1 < heapSize && comp.compare(heap.get(left + 1), heap.get(left)) < 0 ? left + 1 : left;
+      int best = (left + 1) < heapSize && comp.compare(heap.get(left + 1), heap.get(left)) < 0 ? left + 1 : left;
 
-      best = comp.compare(heap.get(index), heap.get(best)) < 0 ? index : best;
+      best = comp.compare(heap.get(best), heap.get(index)) < 0 ? best : index;
 
       if (index == best){
         break;
@@ -116,7 +116,7 @@ public class HeapCreater<T> {
     T obj1 = heap.get(index1);
     T obj2 = heap.get(index2);
 
-    heap.set(index1, obj1);
+    heap.set(index2, obj1);
     heap.set(index1, obj2);
 
     indexMap.put(obj1, index2);
@@ -130,25 +130,28 @@ public class HeapCreater<T> {
   }
 
   public void remove(T obj){
-    Integer index = indexMap.get(obj);
-    if (index == null){
-      return;
-    }
+
     T replaceObj = heap.get(heapSize - 1);
+    int index = indexMap.get(obj);
+    indexMap.remove(obj);
     heap.remove(--heapSize);
+//    if (index == null){
+//      return;
+//    }
+
 
     if (replaceObj != obj){
       heap.set(index, replaceObj);
       indexMap.put(replaceObj, index);
-      heapInsert(index);
-      heapify(index);
+      resign(replaceObj);
     }
-
-
-
-
   }
 
+
+  public  void resign(T obj){
+    heapInsert(indexMap.get(obj));
+    heapify(indexMap.get(obj));
+  }
   private void heapInsert(int index) {
 
     while (comp.compare(heap.get(index), heap.get((index - 1) / 2)) < 0){
