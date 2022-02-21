@@ -41,8 +41,8 @@ public class RecursiveTraversalBT {
     if (null == head){
       return;
     }
-    pre(head.left);
-    pre(head.right);
+    pos(head.left);
+    pos(head.right);
     System.out.println(head.value);
   }
 
@@ -51,9 +51,9 @@ public class RecursiveTraversalBT {
     if (null == head){
       return;
     }
-    pre(head.left);
+    in(head.left);
     System.out.println(head.value);
-    pre(head.right);
+    in(head.right);
 
   }
 
