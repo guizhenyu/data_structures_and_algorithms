@@ -12,7 +12,7 @@ public class CountOfRangeSum {
    * 1. 将数组arr 转化成 0~N数组和 sum
    * 2. 将求数组以下标为N结尾的，满足和在[lower, upper]中,
    *    *    转化成求 sum[0] ~ sum[N - 1] 满足在 【 sum[N】 - upper, sum[N] - lower), 这边的区间是左闭右开
-   * 3. 上面还少了一个判断自己sum[N]是否在 [lower, upper] 区间内
+   * 3. 上面还少了一个判 断自己sum[N]是否在 [lower, upper] 区间内
    * 4. 但是要想降低时间复杂度，采用归并算法，将sum数组拆成左右两部分 sum_L, sum_R
    *    4.1 求 sum_L中， 满足 【 sum_R[N】 - upper, sum_R[N] - lower)
    *    4.2 计算完成后，将 sum_L, sum_R 归并排序，这样就保证了， sum_L和sum_R都是有序递增的，

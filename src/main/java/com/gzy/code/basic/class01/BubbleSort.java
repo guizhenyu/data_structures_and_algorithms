@@ -103,17 +103,18 @@ public class BubbleSort {
     return true;
   }
 
-  private static int[] copyArray(int[] arr) {
-    if (null == arr){
+  private static int[] copyArray(int[] arr1) {
+    if (null == arr1){
       return null;
     }
 
-    int[] newArray = new int[arr.length];
+    int[] copyArr = new int[arr1.length];
 
-    for (int i = 0; i < arr.length; i++){
-      newArray[i] = arr[i];
+    for (int i = 0; i < arr1.length; i++){
+      copyArr[i] = arr1[i];
     }
-    return newArray;
+
+    return copyArr;
   }
 
   private static int[] generateArrayRandom(int maxSize, int maxValue) {

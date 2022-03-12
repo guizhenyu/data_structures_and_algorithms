@@ -14,7 +14,7 @@ public class IsPalindormeList {
 
     private int value;
 
-    private Node next;
+    public Node next;
 
     public Node(int v){
       value = v;
@@ -129,7 +129,7 @@ public class IsPalindormeList {
    *
    * @param head
    */
-  public static Node recoverNode(Node head){
+  public static Node recoverNode1(Node head){
     if(head == null || head.next == null){
       return head;
     }
@@ -146,6 +146,27 @@ public class IsPalindormeList {
       node2 = tempNode;
     }
 
+    return head;
+  }
+
+
+  public static Node recoverNode(Node head){
+    if (null == head || head.next == null){
+      return head;
+    }
+
+    Node pre = null;
+    Node next = null;
+
+    while(null != head){
+      next = head.next;
+      head.next = pre;
+      if (next == null){
+        break;
+      }
+      pre = head;
+      head = next;
+    }
     return head;
   }
 

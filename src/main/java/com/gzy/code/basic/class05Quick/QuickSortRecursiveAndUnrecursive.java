@@ -19,20 +19,22 @@ public class QuickSortRecursiveAndUnrecursive {
     int[] randomArr = new int[size];
 
     for (int i = 0; i < size; i++){
-      randomArr[i] = (int)(Math.random()*(maxValue + 1)) - (int)(Math.random() * maxValue);
+//      randomArr[i] = (int)(Math.random()*(maxValue + 1)) - (int)(Math.random() * maxValue);
+      randomArr[i] = 10;
     }
     return randomArr;
   }
 
 
-  public static int[] copyArray(int[] arr){
-    if (null == arr){
+  public static int[] copyArray(int[] arr1){
+    if (null == arr1){
       return null;
     }
 
-    int[] copyArr = new int[arr.length];
-    for (int i = 0; i < arr.length; i++){
-      copyArr[i] = arr[i];
+    int[] copyArr = new int[arr1.length];
+
+    for (int i = 0; i < arr1.length; i++){
+      copyArr[i] = arr1[i];
     }
 
     return copyArr;
@@ -86,7 +88,7 @@ public class QuickSortRecursiveAndUnrecursive {
 
   // 对数器
   public static void main(String[] args) {
-    int testTime = 500000;
+    int testTime = 1000000;
     int maxSize = 100;
     int maxValue = 100;
     boolean succeed = true;
@@ -124,7 +126,7 @@ public class QuickSortRecursiveAndUnrecursive {
     // 随机方式去选择中间的数
     swap(arr, L + (int)(Math.random() * (R - L + 1)), R);
 
-    int[] midArea = netherlandsFlag(arr, L, R);
+    int[] midArea = netherlandsFlag1(arr, L, R);
     process(arr, L, midArea[0] - 1);
     process(arr, midArea[1] + 1, R);
 
@@ -175,6 +177,35 @@ public class QuickSortRecursiveAndUnrecursive {
     return new int[]{lessL + 1, moreR};
 
 
+  }
+  private static int[] netherlandsFlag1(int[] arr, int l, int r) {
+    int[] midArea = new int[2];
+    // todo 我们默认认为， 数组下标 l ~ (r - 1) 的数 = arr[r]
+    // 左边界
+    int left = l;
+    // 右边界
+    int right = r - 1;
+
+    int index = l;
+    while (index <= right){
+      if (arr[index] < arr[r]){
+        // 左边界往右移动一位，并且交换数据
+        swap(arr, index++, left++);
+
+      }else if (arr[index] > arr[r]){
+        // 右边界往左移动一位，并且交换数据，
+        swap(arr, index, right--);
+      }else{
+        // 相等，左右边界都不变
+        index++;
+      }
+    }
+
+    swap(arr, ++right, r);
+
+    midArea[0] = left;
+    midArea[1] = right;
+    return midArea;
   }
 
 

@@ -78,7 +78,8 @@ public class LRU {
     head.prev = null;
     head.next = tail;
     tail.prev = head;
-    tail.next = null;
+    tail.prev = null;
+
   }
 
   public String get(String key){
