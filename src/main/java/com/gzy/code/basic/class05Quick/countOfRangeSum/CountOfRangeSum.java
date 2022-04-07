@@ -1,4 +1,4 @@
-package com.gzy.code.basic.class05Quick;
+package com.gzy.code.basic.class05Quick.countOfRangeSum;
 
 /**
  * description: CountOfRangeSum date: 2021/12/24 1:26 下午
@@ -87,7 +87,6 @@ public class CountOfRangeSum {
    */
   private static int merge(long[] sums, int lower, int upper, int left, int mid, int right) {
     // 2. 将求数组以下标为N结尾的，满足和在[lower, upper]中,
-    //    转化成求 sum[0] ~ sum[N - 1] 满足在 【 sum[N】 - upper, sum[N] - lower), 这边的区间是左闭右开， 因为到不了sum[N]
 
     // 此时 sum[left~mid] 和 sum[mid + 1~right] 都是已经计算过他们各区区间的子数组和是否满足区间条件，而且都已经排序了，都是递增的
     // 所以就是求 以sum[mid + 1] ~ sum[right] 结尾的子数组中，sum[left] ~ sum[mid]中作为子数组的开始，并且满足 [lower, upper]
@@ -96,15 +95,12 @@ public class CountOfRangeSum {
     int windowL = left;
     int windowR = left;
 
-    // 窗口表达是【windowL, windowR)，左闭右开
     int rightIndex = mid + 1;
     while(rightIndex <= right){
       long lowerL = sums[rightIndex] - upper;
       long upperL = sums[rightIndex] - lower;
       // [lowerL, upperL]
       while (windowR <= mid && sums[windowR] <= upperL){
-        // 因为这边采用的是后自增，所以是右开区间
-        // 如果是右闭区间的话，windowR正好遍历到最后一位，条件也符合， windowR ++ > mid,就越界了，此时sum左[windowR] 不存在
         windowR++;
       }
 
