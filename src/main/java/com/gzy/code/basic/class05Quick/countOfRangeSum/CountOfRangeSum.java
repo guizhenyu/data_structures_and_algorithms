@@ -11,7 +11,9 @@ public class CountOfRangeSum {
    *
    * 1. 将数组arr 转化成 0~N数组和 sum
    * 2. 将求数组以下标为N结尾的，满足和在[lower, upper]中,
-   *    *    转化成求 sum[0] ~ sum[N - 1] 满足在 【 sum[N】 - upper, sum[N] - lower), 这边的区间是左闭右开
+   *    *    转化成求 sum[0] ~ sum[N - 1] 满足在 【 sum[N】 - upper, sum[N] - lower], 这边的区间是左闭右开
+   *
+   *
    * 3. 上面还少了一个判 断自己sum[N]是否在 [lower, upper] 区间内
    * 4. 但是要想降低时间复杂度，采用归并算法，将sum数组拆成左右两部分 sum_L, sum_R
    *    4.1 求 sum_L中， 满足 【 sum_R[N】 - upper, sum_R[N] - lower)
@@ -101,13 +103,20 @@ public class CountOfRangeSum {
       long upperL = sums[rightIndex] - lower;
       // [lowerL, upperL]
       while (windowR <= mid && sums[windowR] <= upperL){
+
         windowR++;
       }
 
       while(windowL <= mid && sums[windowL] < lowerL){
+        // todo: 思考： 这边为什么是 sums[windowL] < lowerL，而不是 sums[windowL] <= lowerL ???
+        //             因为我们计算满足添加的时间窗口公式：windowR - windowL；
+        //             计算windowR时，是包括他自己的边界的
+        //             那么计算windowL时，就不能包含他的边界，因为如果包括边界，windowR - windowL就会把左边界漏掉，计算结果就会少一个。
         windowL++;
       }
       rightIndex++;
+
+
       ans += windowR - windowL;
     }
 
