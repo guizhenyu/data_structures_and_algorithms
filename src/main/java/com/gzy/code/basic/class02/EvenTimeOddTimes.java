@@ -40,6 +40,7 @@ public class EvenTimeOddTimes {
     // ******* 有个知识点
     // 一个数转换成二进制，怎么求最右边的是1的数
     // rightOne = eor ^ (-eor)
+    // todo: 或者是 rightOne = eor &(~eor + 1)
     int rightOne = eor ^ (-eor);
 
     int firstOddTimesNum = 0;

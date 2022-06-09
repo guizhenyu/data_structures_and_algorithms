@@ -103,7 +103,7 @@ public class PartitionAndQuickSort {
 
     int leftEnd = l;
     /**
-     * todo: 错误分析，这边rightStart不应该定义成 r - 1，应为不一定有比arr[r]大的数
+     * todo: 错误分析，这边rightStart不应该定义成 r - 1，因为不一定有比arr[r]大的数
      * 只能定义成  r
      *
      */
