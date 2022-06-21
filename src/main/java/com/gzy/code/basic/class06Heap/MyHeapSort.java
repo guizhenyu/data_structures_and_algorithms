@@ -74,7 +74,7 @@ public class MyHeapSort {
     while(left < heapSize){
 
       // 取子节点 left 和 right 中最大的数
-      //todo 这边少个等于号就导致排序失败，而且这样写太复杂了，有两个三元表达
+      // ，而且这样写太复杂了，有两个三元表达
       int largest = left + 1 >= heapSize ? left : arr[left] > arr[left + 1] ? left : left+1;
 //      int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
       largest = arr[index] > arr[largest] ? index : largest;

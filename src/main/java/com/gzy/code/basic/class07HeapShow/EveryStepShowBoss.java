@@ -300,7 +300,7 @@ public class EveryStepShowBoss {
     }
   }
 
-  private static List<Integer>  getCurAns(List<Customer> daddy) {
+  private static List<Integer> getCurAns(List<Customer> daddy) {
 
     List<Integer> ans = new ArrayList<>();
     for (Customer c : daddy){
