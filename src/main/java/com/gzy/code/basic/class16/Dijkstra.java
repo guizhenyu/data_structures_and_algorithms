@@ -33,11 +33,9 @@ public class Dijkstra {
         }else {
           distanceMap.put(to, Math.min(distanceMap.get(to), distance + weight));
         }
-        selectedSet.add(minNode);
-        minNode = getMinDistanceAndUnSelectedNode(distanceMap, selectedSet);
-
       }
-
+      selectedSet.add(minNode);
+      minNode = getMinDistanceAndUnSelectedNode(distanceMap, selectedSet);
     }
 
     return distanceMap;
