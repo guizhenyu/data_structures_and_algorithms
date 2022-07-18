@@ -1,4 +1,4 @@
-package com.gzy.code.basic.class17;
+package com.gzy.code.basic.class17.sec07;
 
 /**
  * description: Hanoi1 date: 2022/7/7 09:24
