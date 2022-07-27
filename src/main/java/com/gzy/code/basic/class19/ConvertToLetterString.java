@@ -19,7 +19,7 @@ public class ConvertToLetterString {
         int len = (int)(Math.random() * N);
         String str = randomString(len);
         int ans0 = natureWisedom(str);
-        System.out.println(ans0);
+        System.out.print(ans0 + " ");
       }
     }
   }
