@@ -16,7 +16,7 @@ public class CoinsWayNoLimit {
   public static void main(String[] args) {
     int maxLen = 10;
     int maxValue = 30;
-    int testTime = 10000;
+    int testTime = 100000;
     System.out.println("测试开始");
 
     for (int i = 0; i < testTime; i++){
@@ -24,7 +24,8 @@ public class CoinsWayNoLimit {
       int aim = (int)(maxValue * Math.random()) + 1;
       int ways1 = violenceRecursive(arr, aim);
       int ways2 = dp(arr, aim);
-      if (ways1 != ways2){
+      int ways3 = dp1(arr, aim);
+      if (ways1 != ways2 || ways3 != ways2){
         System.out.println("oops");
         break;
 
@@ -32,6 +33,33 @@ public class CoinsWayNoLimit {
     }
     System.out.println("success");
 
+  }
+
+  /**
+   * 经过分析，dp[index][aim] = dp[index + 1][aim - 0 * arr[index]] + dp[index + 1][aim - 1 * arr[index]] + ... + dp[index + 1][aim - zhang * arr[index]]
+   * 而 dp[index][aim - arr[index]] = dp[index + 1][aim - 1 * arr[index]] + ... + dp[index + 1][aim - zhang * arr[index]]
+   *  所以  dp[index][aim] = dp[index + 1][aim - 0 * arr[index]] + dp[index][aim - arr[index]]
+   * @param arr
+   * @param aim
+   * @return
+   */
+  private static int dp1(int[] arr, int aim) {
+    if (arr == null || arr.length == 0 || aim < 0){
+      return 0;
+    }
+    int N = arr.length;
+    int[][] dp = new int[N + 1][aim + 1];
+    dp[N][0] = 1;
+    for (int index = N - 1; index >= 0; index--){
+      for (int rest = 0; rest <= aim; rest++){
+        dp[index][rest] = dp[index + 1][rest];
+        if (rest >= arr[index]){
+          dp[index][rest] += dp[index][rest - arr[index]];
+        }
+      }
+    }
+
+    return dp[0][aim];
   }
 
   private static int dp(int[] arr, int aim) {
@@ -84,9 +112,9 @@ public class CoinsWayNoLimit {
     }
 
     int ans = 0;
-    for (int i = 0; i * arr[index] <= rest; i++){
+    for (int izhang = 0; izhang * arr[index] <= rest; izhang++){
 
-      ans += process(arr, index + 1, rest - arr[index] * i);
+      ans += process(arr, index + 1, rest - arr[index] * izhang);
 
     }
 
@@ -101,7 +129,7 @@ public class CoinsWayNoLimit {
     for (int i = 0; i < n; i++){
 
       do{
-        arr[i] = (int)(maxValue * Math.random());
+        arr[i] = (int)(maxValue * Math.random()) + 1;
       }while (has[arr[i]]);
       has[arr[i]] = true;
     }
