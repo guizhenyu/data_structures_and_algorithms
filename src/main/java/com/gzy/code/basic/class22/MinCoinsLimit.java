@@ -26,7 +26,7 @@ public class MinCoinsLimit {
       int ans1 = violenceRecursive(arr, aim);
       int ans2 = dp(arr, aim);
       int ans3 = dp1(arr, aim);
-      if (ans1 != ans2){
+      if (ans1 != ans2 || ans3 != ans2){
         System.out.println("Oops!");
         return;
       }
