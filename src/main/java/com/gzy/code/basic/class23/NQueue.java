@@ -11,9 +11,9 @@ public class NQueue {
   public static void main(String[] args) {
     int n = 15;
     
-//    int ways = natureWisdom(n);
-//    System.out.println(ways);
-    System.out.println(num2(n));
+    int ways = natureWisdom(n);
+    System.out.println(ways);
+//    System.out.println(num2(n));
   }
 
   private static int natureWisdom(int n) {
