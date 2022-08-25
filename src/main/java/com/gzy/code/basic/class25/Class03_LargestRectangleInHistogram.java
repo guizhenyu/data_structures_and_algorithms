@@ -31,7 +31,7 @@ public class Class03_LargestRectangleInHistogram {
 
         int width = r - i + 1;
 
-        maxArea = Math.max(maxArea, h * width);
+          maxArea = Math.max(maxArea, h * width);
       }
     }
     return maxArea;
