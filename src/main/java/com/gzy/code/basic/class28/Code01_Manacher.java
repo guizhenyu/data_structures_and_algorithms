@@ -62,7 +62,7 @@ public class Code01_Manacher {
    *                    这边 R > i时，取 mirror_i 的半径 跟 R - i 的最小值，是为了确保初始的 i + pArr[i] 不越界
    *                     越界了，会导致忽略 R+1 ~ i + pArr[i] 之间的数据还没有比较
    *              4.1.2 如果  pArr[C] + C <= i
-   *                    pArr[C] + C = i 代表 i 没有对称点， 那么 i 的初始尝试回文半径给个默认值 1
+   *                    pArr[C] + C < i 代表 i 没有对称点， 那么 i 的初始尝试回文半径给个默认值 1
    *                    1 代表初始默认回文半径长度为1， 考虑到最终返回时要 - 1， 所以 如果此时 a#b, i -> #, 那么该位置对应的最终是无效的，最终 1-1 = 0
    *                      而如果是 #a#, 那么初始回文长度是1 ，后面判断再 +1 ，最后返回还得-1， 最终还是1， 也就是a对应的回文数长度是1
    *                    pArr[C] + C ==  i
@@ -102,13 +102,13 @@ public class Code01_Manacher {
 //          break;
 //        }
         // 4.2.1  i' - pArr[i'] < C - R break
-        if (mirror_i >= 0 && (mirror_i - pArr[mirror_i]) < (C - R)){
+        if (mirror_i >= 0 && (mirror_i - pArr[mirror_i]) > (2 * C - R)){
           break;
         }
-        // 4.2.2  i' - pArr[i'] == C - R break
-        else if(mirror_i >= 0 && (mirror_i - pArr[mirror_i]) == (C - R)){
-          break;
-        }
+//        // 4.2.2  i' - pArr[i'] == C - R
+//        else if(mirror_i >= 0 && (mirror_i - pArr[mirror_i]) == (C - R)){
+//          要计算
+//        }
         // 4.2.3  i' - pArr[i'] > C - R
         else {
           if (chars[i + pArr[i]] == chars[i - pArr[i]]) {

@@ -98,7 +98,7 @@ public class Code01_KMP {
     int cn = 0;
     while (i < chars.length){
       if (chars[i - 1] == chars[cn]){
-        next[i++] = cn++;
+        next[i++] = ++cn;
       }else if (cn > 0){
         cn = next[cn];
       }else {
