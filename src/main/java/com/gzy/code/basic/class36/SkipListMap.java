@@ -110,7 +110,7 @@ public class SkipListMap {
         }
 
         SkipNode<K, V> pre = head;
-        SkipNode<K, V> nextNode = null;
+//        SkipNode<K, V> nextNode = null;
         int curLevel = maxLevel;
         while (curLevel >= 0){
           pre = mostLessRightNodeInLevel(pre, key, curLevel);
