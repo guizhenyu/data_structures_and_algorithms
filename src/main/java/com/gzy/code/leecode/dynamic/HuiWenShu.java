@@ -1,4 +1,4 @@
-package com.gzy.code.leecode;
+package com.gzy.code.leecode.dynamic;
 
 /**
  * description: HuiWenShu date: 2021/8/23 10:09 上午

@@ -1,4 +1,4 @@
-package com.gzy.code.leecode;
+package com.gzy.code.leecode.dynamic;
 
 import java.util.Arrays;
 import java.util.OptionalInt;
