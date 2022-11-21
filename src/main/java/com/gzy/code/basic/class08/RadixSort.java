@@ -141,7 +141,7 @@ public class RadixSort {
         counts[j] = counts[j] + counts[j - 1];
       }
 
-      for (int j = R; j >= L; j--){
+      for (int j = length - 1; j >= 0; j--){
         int index = getDigit(arr[j], i);
 
         help[counts[index] - 1] = arr[j];
