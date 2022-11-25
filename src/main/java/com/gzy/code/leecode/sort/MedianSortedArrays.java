@@ -14,21 +14,63 @@ public class MedianSortedArrays {
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
-        if ((nums1 == null || nums1.length == 0) && (nums1 == null || nums1.length == 0)){
-            return 0.0;
-        }
-
         int m = nums1 == null? 0 : nums1.length;
         int n = nums2 == null? 0 : nums2.length;
-        int sum = m + n;
-        boolean isEven = sum % 2 == 0? true : false;
-        // 中位数的索引
-        int midIndex = sum / 2 + (!isEven? 1 : 0);
+
+        boolean isEven = (m + n) % 2 == 0? true : false;
+        int k = (m + n) / 2;
+        if (isEven){
+            return evenMidNum(nums1, nums2, m, n, k);
+        }else{
+            return primeMidNum(nums1, nums2, m, n, k);
+        }
+
+
+    }
+
+    private double primeMidNum(int[] nums1, int[] nums2, int m, int n, int k) {
+
+        int index1 = 0;
+        int index2 = 0;
+
+        while (true){
+            if (index1 == m){
+                return nums2[index2 + k - 1];
+            }
+            if (index2 == n){
+                return nums1[index1 + k - 1];
+            }
+            if (k == 1){
+                return Math.min(nums1[index1], nums2[index2]);
+            }
+
+            // 正常情况
+            int half = k / 2;
+            int newIndex1 = Math.min(index1 + half, m) - 1;
+            int newIndex2 = Math.min(index2 + half, n) - 1;
+
+            int p1 = nums1[newIndex1];
+            int p2 = nums2[newIndex2];
+
+            if (p1 > p2){
+                index2 = newIndex2 + 1;
+                k -= newIndex2 + 1 - index2;
+            }else {
+                index1 = newIndex1 + 1;
+                k -= newIndex1 + 1 - index1;
+            }
+
+
+        }
 
 
 
 
 
+    }
 
+    private double evenMidNum(int[] nums1, int[] nums2, int m, int n, int k) {
+
+        return 0;
     }
 }
