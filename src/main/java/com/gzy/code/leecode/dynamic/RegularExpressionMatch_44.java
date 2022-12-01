@@ -29,7 +29,7 @@ public class RegularExpressionMatch_44 {
     if (p == null || p.length() == 0){
       return false;
     }
-    int n = s == null || s.length() == 0 ? 0 : s.length();
+    int n = s == null? 0 : s.length();
     int m = p.length();
     boolean[][] dp = new boolean[n + 1][m + 1];
     dp[0][0] = true;
@@ -63,9 +63,6 @@ public class RegularExpressionMatch_44 {
 
 
   public static boolean match(String s, String p, int i, int j){
-//    if (i == 0 && j == 0){
-//
-//    }
     if (i == 0){
       return false;
     }
