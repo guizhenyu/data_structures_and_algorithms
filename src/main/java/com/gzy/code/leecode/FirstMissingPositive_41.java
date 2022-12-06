@@ -1,8 +1,6 @@
 package com.gzy.code.leecode;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+
 
 public class FirstMissingPositive_41 {
 
@@ -15,39 +13,41 @@ public class FirstMissingPositive_41 {
 
 
     public static int firstMissingPositive(int[] nums) {
-        Map<Integer, Boolean> map = new HashMap<>();
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < nums.length; i++){
-            if (nums[i] > 0 && map.containsKey(nums[i] - 1)){
-                map.put(nums[i] - 1, false);
-            }
+        // todo: 想办法标记数组中的数，标记完，依次遍历数组，没有被交集的数对应的下标就是我们要找的答案
+        // nums的大小为n,
+        // 那么最小的正整数，肯定是在 1 ~ （n + 1）当中
+        // 首先把负数变成 n + 1
+        // 然后遍历，将值在 1 ~ n + 1之间的代表数组中第几个数, 将代表的数变为负数（相当于做标记）
+        // 最后再遍历这个数组，如果是正数，直接返回 i + 1
+        // 遍历完成，还没有找到正数，就直接返回 n + 1;
 
-            if(!map.containsKey(nums[i])){
-                map.put(nums[i], true);
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++){
+            if (nums[i] <= 0){
+                nums[i] = n + 1;
             }
         }
-        map.put(-1, true);
 
-        int ans = Integer.MAX_VALUE;
-        for (Integer num : map.keySet()){
-            if (map.get(num)){
-              num = num < 0 ? 1 : num + 1;
-              if (num < ans){
-                  stack.push(ans);
-                  ans = num;
-              }
-            }else if(ans == num){
-                ans = stack.pop();
+        for (int i = 0; i < n; i++){
+            int num = Math.abs(nums[i]);
+            if (num <= n && nums[num - 1] > 0){
+
+                nums[num - 1] = -nums[num - 1];
             }
-
-
         }
 
-        return ans;
+        for (int i = 0; i < n; i++){
+            if (nums[i] > 0){
+                return i + 1;
+            }
+        }
+
+        return n + 1;
     }
 
     public static void main(String[] args) {
-        int[] nums = {3,4,-1,1};
+        int[] nums = {1,1};
         int i = firstMissingPositive(nums);
         System.out.println(i);
     }

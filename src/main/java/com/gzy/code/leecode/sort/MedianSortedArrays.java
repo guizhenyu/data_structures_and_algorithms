@@ -2,6 +2,12 @@ package com.gzy.code.leecode.sort;
 
 public class MedianSortedArrays {
 
+    public static void main(String[] args) {
+        int[] nums1 = {1, 3};
+        int[] nums2 = {2};
+        System.out.println(findMedianSortedArrays(nums1, nums2));
+    }
+
     /**
      *
      * 给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
@@ -12,23 +18,23 @@ public class MedianSortedArrays {
      * @param nums2
      * @return
      */
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
         int m = nums1 == null? 0 : nums1.length;
         int n = nums2 == null? 0 : nums2.length;
 
         boolean isEven = (m + n) % 2 == 0? true : false;
-        int k = (m + n) / 2;
+        int k = (m + n) / 2 + 1;
         if (isEven){
-            return evenMidNum(nums1, nums2, m, n, k);
+            return (midNum(nums1, nums2, m, n, k) + midNum(nums1, nums2, m, n, k - 1 )) / 2;
         }else{
-            return primeMidNum(nums1, nums2, m, n, k);
+            return midNum(nums1, nums2, m, n, k);
         }
 
 
     }
 
-    private double primeMidNum(int[] nums1, int[] nums2, int m, int n, int k) {
+    private static double midNum(int[] nums1, int[] nums2, int m, int n, int k) {
 
         int index1 = 0;
         int index2 = 0;
@@ -53,14 +59,14 @@ public class MedianSortedArrays {
             int p2 = nums2[newIndex2];
 
             if (p1 > p2){
-                index2 = newIndex2 + 1;
+
                 k -= newIndex2 + 1 - index2;
+                index2 = newIndex2 + 1;
             }else {
-                index1 = newIndex1 + 1;
+
                 k -= newIndex1 + 1 - index1;
+                index1 = newIndex1 + 1;
             }
-
-
         }
 
 
@@ -69,8 +75,4 @@ public class MedianSortedArrays {
 
     }
 
-    private double evenMidNum(int[] nums1, int[] nums2, int m, int n, int k) {
-
-        return 0;
-    }
 }
