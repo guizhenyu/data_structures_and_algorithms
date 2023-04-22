@@ -11,6 +11,13 @@
     <dependencies>
 
         <dependency>
+            <groupId>io.deepblueai</groupId>
+            <artifactId>sms</artifactId>
+            <version>1.0.0-release</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.78</version>
