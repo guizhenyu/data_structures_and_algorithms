@@ -40,12 +40,13 @@ public class Solution3 {
     }
 
     public static void main(String[] args) {
-        String s = "12323e2345";
-        System.out.println(s);
-        char[] chars = s.toCharArray();
-        System.out.println(chars[0]);
-        String s1 = chars.toString();
-
-        System.out.println(String.valueOf(chars));
+        String s = "781292217";
+//        System.out.println(s);
+//        char[] chars = s.toCharArray();
+//        System.out.println(chars[0]);
+//        String s1 = chars.toString();
+        Solution3 solution3 = new Solution3();
+        solution3.solution(s);
+//        System.out.println(String.valueOf(chars));
     }
 }
