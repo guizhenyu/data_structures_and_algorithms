@@ -21,6 +21,10 @@ public class ReverseNodesInKGroup {
             len++;
         }
 
+        if (len < 2){
+            return head;
+        }
+
         int times = len / k;
         cur = head;
         ListNode preTail = null;
@@ -47,9 +51,11 @@ public class ReverseNodesInKGroup {
 //                preTail = preTail.next;
 //                preTail.next = next;
 //                preTail.next = cur;
+                ListNode nextTail = preTail.next;
                 preTail.next.next = next;
                 preTail.next = cur;
                 cur = next;
+                preTail = nextTail;
             }
             times--;
         }

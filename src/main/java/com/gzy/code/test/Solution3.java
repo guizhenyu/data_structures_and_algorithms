@@ -30,7 +30,6 @@ public class Solution3 {
             char preChar = charsOld[index];
             if(chars[i] != preChar){
                 charsOld[index] = chars[i];
-
                 dfs(String.valueOf(charsOld), index + 1, leftChange - 1, ans, chars);
                 charsOld[index] = preChar;
 

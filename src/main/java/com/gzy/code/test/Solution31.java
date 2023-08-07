@@ -1,73 +1,68 @@
 package com.gzy.code.test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Array;
+import java.util.*;
 
 public class Solution31 {
-    public int solution(String S) {
-        // Implement your solution here
-//        char[] chars = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-//        Set<Integer> set = new HashSet<>();
-//        dfs(S, 0, 1, set, chars);
-//
-//        return set.size();
 
-        int n = S.length();
-        int[] cache = new int[10];
 
-        cache[0] = 0;
-        cache[1] = 2;
-        cache[2] = 1;
-        cache[3] = 0;
-        cache[4] = 2;
-        cache[5] = 1;
-        cache[6] = 0;
-        cache[7] = 2;
-        cache[8] = 1;
-        cache[9] = 0;
 
-        char[] chars = S.toCharArray();
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = chars[i] - '0';
-        }
 
-        return process(nums, n - 1, false, 0, cache);
+
+
+    public int solution(String str) {
+        char[] chars = str.toCharArray();
+
+
+
+        return 2;
     }
 
+//    public static void main(String[] args) {
+//        String s = "01232323450";
+//
+//        System.out.println(Integer.valueOf(s));
+//        char[] chars = s.toCharArray();
+//        System.out.println(chars[0]);
+//        String s1 = chars.toString();
+//
+//        System.out.println(String.valueOf(chars));
+//    }
 
-    public int process(int[] nums, int index, boolean isChange, int nextNum, int[] cache) {
-        int num = nums[index];
 
-        if (index == 0) {
-            if (isChange) {
-                if ((num * 10 + nextNum) % 3 == 0) {
-                    return 1;
-                } else {
+    public static int findLeastNumOfUniqueInts(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>(arr.length);
 
-                    return 0;
-                }
-            } else {
-                return (9 - cache[nextNum]) / 3 + 1;
+        for (int i = 0; i < arr.length; i++){
+            Integer record = map.get(arr[i]);
+            if(record == null){
+                map.put(arr[i], 1);
+            }else {
+                map.put(arr[i], record + 1);
             }
         }
+        List<Integer> list = new ArrayList<>();
+        list.addAll(map.values());
+        Collections.sort(list);
         int ans = 0;
-        if (num >= cache[nextNum]) {
-            ans += process(nums, index - 1, isChange, num - cache[nextNum], cache);
-        }
-        if (!isChange) {
-            for (int i = 0; i <= 9 - cache[nextNum]; i++) {
-                ans += process(nums, index - 1, true, i, cache);
+        for (int i = 0; i < list.size(); i++){
+            k = k - list.get(i);
+            if(k <= 0){
+                ans = list.size() - i - 1;
+               break;
             }
         }
+
         return ans;
+
+
     }
 
 
     public static void main(String[] args) {
-        String s = "781292217";
-        Solution31 solution31 = new Solution31();
 
-        System.out.println(solution31.solution(s));
+        int[] arr = {5, 5, 4};
+        int ans = findLeastNumOfUniqueInts(arr, 1);
+        System.out.println(ans);
     }
 }
