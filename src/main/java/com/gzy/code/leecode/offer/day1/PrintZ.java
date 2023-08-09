@@ -14,18 +14,17 @@ public class PrintZ {
         // 记录索引是增还是减，因为是Z形状的字符串
         boolean isIncrement = true;
         // 需要填充的空字符串标量
-        int appendBlankStand = numRows - 2;
         for(int i = 0; i < s.length(); i++){
 
             if(sbArr[sbArrIndex] == null){
                 sbArr[sbArrIndex] = new StringBuilder();
             }
 
-            int appendBlankNum = Math.abs(Math.abs(sbArrIndex -(isIncrement? 0 : sbArrMaxIndex)) -  appendBlankStand);
+//            int appendBlankNum  = Math.abs(Math.abs(sbArrIndex -(isIncrement? 0 : sbArrMaxIndex)) - appendBlankStand);
             sbArr[sbArrIndex].append(s.charAt(i));
-            for (int j = 0; j < appendBlankNum; j++) {
-                sbArr[sbArrIndex].append(" ");
-            }
+//            for (int j = 0; j < appendBlankNum; j++) {
+//                sbArr[sbArrIndex].append(" ");
+//            }
 
 
             sbArrIndex += isIncrement? 1 : -1;
@@ -38,7 +37,7 @@ public class PrintZ {
         StringBuilder ans = new StringBuilder();
         for(int i = 0; i < numRows; i++){
             if(sbArr[i] != null){
-                ans.append(sbArr[i].toString()).append("\n");
+                ans.append(sbArr[i].toString());
             }
 
         }
