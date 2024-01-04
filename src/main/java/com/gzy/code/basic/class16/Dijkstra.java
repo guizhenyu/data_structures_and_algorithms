@@ -25,6 +25,7 @@ public class Dijkstra {
       int distance = distanceMap.get(minNode);
 
       List<Edge> edges = minNode.edges;
+
       for (Edge edge : edges) {
         int weight = edge.weight;
         Node to = edge.to;

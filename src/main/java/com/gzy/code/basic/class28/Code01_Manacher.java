@@ -15,8 +15,68 @@ public class Code01_Manacher {
    */
 
 
+  public static char[] populateStringWithHash(String s){
+
+    char[] chars = s.toCharArray();
+    int len = chars.length;
+    char[] ans  = new char[len * 2 + 1];
+
+    int index = 0;
+    for (int i = 0; i < ans.length; i++){
+
+      if ((i & 1) == 0){
+        ans[i] = '#';
+      }else {
+        ans[i] = chars[index++];
+      }
+
+    }
+
+    return ans;
+
+  }
+  public static int  manacherNew(String s){
+
+    char[] chars = populateStringWithHash(s);
+    int n = chars.length;
+    int[] pArr = new int[n];
+
+    int max = 0;
+    int maxIndex = -1;
+    int R = -1;
+    int C = -1;
+
+    for (int i = 0; i < n; i++){
+      int mirror_i = 2 * C - i;
+      pArr[i] = R > i? Math.min(pArr[mirror_i], R - i) : 1;
+
+      if (mirror_i >=0 && mirror_i - pArr[mirror_i] > 2 * C - R){
+        continue;
+      }
+
+      while (i + pArr[i] < n && i - pArr[i] >= 0){
+        if (chars[i + pArr[i]] == chars[i - pArr[i]]){
+          pArr[i]++;
+        }else {
+          break;
+        }
+      }
+
+      if (i + pArr[i] > R){
+        C = i;
+        R = C + pArr[i];
+      }
+
+      if (max < pArr[i]){
+        max = pArr[i];
+        maxIndex = i;
+      }
+    }
+
+    return max - 1;
 
 
+  }
   public static void main(String[] args) {
     int testTime = 100000;
 
@@ -30,7 +90,7 @@ public class Code01_Manacher {
 
       int ans = natureWisdom(str);
 
-      int ans1 = manacher(str);
+      int ans1 = manacherNew(str);
       if (ans != ans1){
         System.out.println("oops");
         System.out.println("str " + str);
@@ -53,7 +113,7 @@ public class Code01_Manacher {
    *      2. 中线点C, 也就是回文半径中心的下标索引, R 代表右边界 = C + r;  最右的扩成功位置的下一位, 也就是不包括
    *      3. 准备一个回文半径数组，跟字符串长度一样长 pArr[]
    *          pArr[i] = r  ->  i 代表字符对应的索引， r代表以 chars[i] 为回文子串的中心，半径长度
-   *      4. 这边先将原始字符串，相邻的字符串都填充的了字符"#"，所以就将最长回文字符串装化成了求最长的pArr[index]值
+   *      4. 这边先将原始字符串，相邻的字符串都填充的了字符"#"，所以就将最长回文字符串转化成了求最长的pArr[index]值
    *      5. 遍历的步骤：
    *          i 代表当前遍历的索引位置
    *          C 代表现在所处的回文字符串的中心点的索引，初始值是 -1 代表不存在
@@ -75,9 +135,7 @@ public class Code01_Manacher {
    *              5.2.1  i' 的左边界在 C的左边界内
    *                这种情况直接跳过， pArr[i] == pArr[i'], 由于是在大的以C为中心的回文串中，不需要比较
    *              5.2.2  i' 的左边界==C的左边界
-   *                这种情况也不要比较， 因为如果 chars[i - pArr[i] - 1] == (chars[i + pArr[i] +1] = chars[R + 1])
-   *                                  那么根据对称性， chars[i' - pArr[i'] - 1] ==  chars[R + 1]，那么就会推翻 R是目前C的最大回文半径右边界，
-   *                                  R要+1， 显然不成立
+   *                这种情况也要比较，由于边界不可达
    *              5.2.3  i' 的左边界小于C的左边界
    *                   得比较 chars[i - pArr[i] - 1] == (chars[i + pArr[i] +1] ？
    */
@@ -98,28 +156,28 @@ public class Code01_Manacher {
       pArr[i] = R > i? Math.min(pArr[2 * C - i], R - i) : 1;
 //      pArr[i] = R > i? pArr[2 * C - i] : 1;
       int mirror_i = 2 * C - i;
-
+      if (mirror_i >= 0 && (mirror_i - pArr[mirror_i]) > (2 * C - R)){
+        continue;
+      }
       while (i + pArr[i] < chars.length && i - pArr[i] > -1){
 
 //        if (mirror_i < 0){
 //          break;
 //        }
         // 4.2.1  i' - pArr[i'] < C - R break
-        if (mirror_i >= 0 && (mirror_i - pArr[mirror_i]) > (2 * C - R)){
-          break;
-        }
+
 //        // 4.2.2  i' - pArr[i'] == C - R
 //        else if(mirror_i >= 0 && (mirror_i - pArr[mirror_i]) == (C - R)){
 //          要计算
 //        }
         // 4.2.3  i' - pArr[i'] > C - R
-        else {
+
           if (chars[i + pArr[i]] == chars[i - pArr[i]]) {
             pArr[i]++;
           }else {
             break;
           }
-        }
+
       }
 
       if (i + pArr[i] > R){

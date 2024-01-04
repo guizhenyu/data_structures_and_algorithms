@@ -20,7 +20,7 @@ public class CoinsWayNoLimit {
     System.out.println("测试开始");
 
     for (int i = 0; i < testTime; i++){
-      int[] arr = randomArry(maxLen, maxValue);
+      int[] arr = randomArray(maxLen, maxValue);
       int aim = (int)(maxValue * Math.random()) + 1;
       int ways1 = violenceRecursive(arr, aim);
       int ways2 = dp(arr, aim);
@@ -121,7 +121,7 @@ public class CoinsWayNoLimit {
     return ans;
   }
 
-  private static int[] randomArry(int maxLen, int maxValue) {
+  private static int[] randomArray(int maxLen, int maxValue) {
 
     int n = (int)(maxLen * Math.random());
     int[] arr = new int[n];

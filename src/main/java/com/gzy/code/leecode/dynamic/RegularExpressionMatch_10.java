@@ -128,7 +128,6 @@ public class RegularExpressionMatch_10 {
           // 如果一个一个比较类比下去，无法知道边界（i - 2 ,i-3..... 这些位置上的字符是否和j-1上的字符相等）
           // 但是，由于我们是从i = 0 到 i = i - 1,已经填了，所以，我们这边只要填一个，dp[i - 1][j] 因为他代表了 [i - 2][j] .....[i - n ][j]所有的并集结果
           if (matchs(s, p, i, j - 1)){
-
             dp[i][j] = dp[i - 1][j] || dp[i][j];
           }
         }else {

@@ -13,7 +13,7 @@ public class NQueens {
 
 
   public static void main(String[] args) {
-    int N = 15;
+    int N = 20;
 
 
     System.out.println(f2(N));
